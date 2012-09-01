@@ -6,6 +6,7 @@
 - Asynchronous Module Definition [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD): the library modules should be primarely compatible with DOJO 1.7 but also with other loaders like [RequireJS](http://requirejs.org/)
 - [Behaviour-Driven Development](http://behaviour-driven.org/Introduction) with [Jasmine](https://github.com/pivotal/jasmine/wiki): this [project](https://github.com/podefr/jasmine-reqjs-jstd) glues everything together.
 - Git and Github: this is my first open source project hosted here. [:
+- Create JavaScript code that is compatible with [JSHint](http://www.jshint.com).
 
 This library and the sample code is Open Source under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
 
@@ -18,7 +19,8 @@ This library and the sample code is Open Source under the [Apache 2.0 License](h
 Initial release. 
 - Detects two browsers: Internet Explorer and Firefox.
 - Detects two OS: Windows and OSX.
-- ASTAH class diagram.
+- [ASTAH](http://astah.net/editions/community) class diagram.
+- Validated by JSHint
 - No Jasmine unit tests.
 - Not AMD compatible.
 
