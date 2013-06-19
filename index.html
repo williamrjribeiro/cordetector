@@ -1,24 +1,56 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML>
+<html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Chain of Resposability Design Pattern with DOJO framework</title>
 	</head>
-	<body>
-		<h1>Browser and OS detection</h1>
+	<body style="{background-color: #6eff59}">
+		<h1>Browser and OS Chained Detection</h1>
 		<div id="cordetectorout"></div>
-		<!--  -->
-		<script type="text/javascript" src="http://download.dojotoolkit.org/release-1.7.1/dojo-release-1.7.1/dojo/dojo.js.uncompressed.js"
-        	data-dojo-config="parseOnLoad: true"></script>
-		<script src="js/cordetector.js" type="text/javascript"></script>
+		<!--div> <h2>Are you using ... </h2><ul><li>FireFox?{% if browser.isFireFox %} YEP! {% else %} nope {% endif %}</li></ul></div-->
+		<script>
+			var dojoConfig = {
+				async: true,
+				// This code registers the correct location of the "js"
+				// package so we can load Dojo from the CDN whilst still
+				// being able to load local modules
+				packages: [{
+					name: "js",
+					location: location.pathname.replace(/\/[^/]+$/, '') + 'js'
+				}]
+			};
+		</script>
+		<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.0/dojo/dojo.js"></script>
 		<script type="text/javascript">
-    	    dojo.ready(function(){
-    	    	// get an instance of CoRDetector , initialize and detet but all after dojo is ready!
-    	    	var corDetector = CoRDetector();
-    	    	corDetector.detect();
-    	    	console.debug(corDetector);
-    	    });
+	        require([
+		        "dojo/dom",
+		        "js/cordetector2",
+		        "dojox/dtl",
+		        "dojox/dtl/Context",
+		        "dojo/domReady!"], function(dom, cor, dtl, context){
+
+		        console.log("cor.browser.isFirefox: " + cor.browser.isFirefox);
+		        console.log("cor.browser.isIE: " + cor.browser.isIE);
+		        console.log("cor.browser.isChrome: " + cor.browser.isChrome);
+		        console.log("cor.browser.isSafari: " + cor.browser.isSafari);
+
+		        console.log("cor.os.isWin: " + cor.os.isWin);
+		        console.log("cor.os.isMac: " + cor.os.isMac);
+
+		        var templateString = '<div> <h2>Detecting your browser ... </h2><ul>' +
+				        '<li>FireFox:{% if browser.isFireFox %} YEP! {% else %} nope {% endif %}</li>' +
+				        '<li>Internet Explorer:{% if browser.isIE %} YEP! {% else %} nope {% endif %}</li>' +
+				        '<li>Safari:{% if browser.isSafari %} YEP! {% else %} nope {% endif %}</li>' +
+				        '<li>Chrome:{% if browser.isChrome %} YEP! {% else %} nope {% endif %}</li>' +
+				        '</ul><h2>Detecting your OS ... </h2><ul>' +
+				        '<li>Windows:{% if os.isWin %} YEP! {% else %} nope {% endif %}</li>' +
+				        '<li>Mac OS X:{% if os.isMac %} YEP! {% else %} nope {% endif %}</li>' +
+				        '</div>';
+		        var template = new dtl.Template(templateString);
+		        var context = new context(cor);
+
+		        document.getElementById('cordetectorout').innerHTML = template.render(context);
+	        });
 	    </script>
 	</body>
 </html>

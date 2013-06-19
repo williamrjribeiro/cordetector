@@ -1,5 +1,8 @@
-# Igonre local DOJO folder
+# Ignore local DOJO folder
 libs-local/
+
+# Ignore Idea (Webstorm) files
+*.idea*
 #################
 ## Eclipse
 #################
